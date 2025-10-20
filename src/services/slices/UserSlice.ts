@@ -10,7 +10,6 @@ import {
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { deleteCookie, setCookie } from '../../utils/cookie';
-import { access, stat } from 'fs';
 
 type TUserState = {
   user: TUser | null;
@@ -58,11 +57,12 @@ export const registerUser = createAsyncThunk(
 
 export const updateUserData = createAsyncThunk(
   'user/updateUser',
-  async (user: Partial<TRegisterData>) => updateUserApi(user)
+  updateUserApi
 );
 
-export const getUserData = createAsyncThunk('user/getUser', async () =>
-  getUserApi()
+export const getUserData = createAsyncThunk(
+  'user/getUser',
+  getUserApi
 );
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
