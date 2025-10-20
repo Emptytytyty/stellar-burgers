@@ -1,4 +1,4 @@
-import { TOrder } from '@utils-types';
+import { TIngredient, TOrder } from '@utils-types';
 
 export type OrdersListProps = {
   orders: TOrder[];
