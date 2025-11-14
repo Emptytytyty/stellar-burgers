@@ -60,10 +60,7 @@ export const updateUserData = createAsyncThunk(
   updateUserApi
 );
 
-export const getUserData = createAsyncThunk(
-  'user/getUser',
-  getUserApi
-);
+export const getUserData = createAsyncThunk('user/getUser', getUserApi);
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   logoutApi().then((data) => {
