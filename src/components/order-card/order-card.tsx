@@ -7,7 +7,7 @@ import { OrderCardUI } from '../ui/order-card';
 import {
   getIngredients,
   getIngredientsAction
-} from '../../services/slices/IngredientsSlice';
+} from '../../services/slices/Ingredients/IngredientsSlice';
 import { useDispatch, useSelector } from '../../services/store';
 
 const maxIngredients = 6;

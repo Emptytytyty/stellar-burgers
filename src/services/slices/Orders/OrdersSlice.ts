@@ -80,7 +80,7 @@ export const OrdersSlice = createSlice({
       })
       .addCase(getFeeds.rejected, (state: TOrdersState, action) => {
         state.isOrdersRequest = false;
-        state.ordersError = action.payload as string;
+        state.ordersError = action.error.message!;
       })
       .addCase(getFeeds.fulfilled, (state: TOrdersState, action) => {
         state.isOrdersRequest = false;
@@ -92,7 +92,7 @@ export const OrdersSlice = createSlice({
       })
       .addCase(getUserOrders.rejected, (state: TOrdersState, action) => {
         state.isUserOrdersRequest = false;
-        state.userOrdersError = action.payload as string;
+        state.userOrdersError = action.error.message!;
       })
       .addCase(getUserOrders.fulfilled, (state: TOrdersState, action) => {
         state.isUserOrdersRequest = false;
@@ -104,7 +104,7 @@ export const OrdersSlice = createSlice({
       })
       .addCase(postOrder.rejected, (state: TOrdersState, action) => {
         state.postOrderRequest = false;
-        state.postOrderError = action.payload as string;
+        state.postOrderError = action.error.message!;
       })
       .addCase(postOrder.fulfilled, (state: TOrdersState, action) => {
         state.postOrderRequest = false;
@@ -116,7 +116,7 @@ export const OrdersSlice = createSlice({
       })
       .addCase(getOrderByNumber.rejected, (state: TOrdersState, action) => {
         state.orderByNumberRequest = false;
-        state.orderByNumberError = action.payload as string;
+        state.orderByNumberError = action.error.message!;
       })
       .addCase(getOrderByNumber.fulfilled, (state: TOrdersState, action) => {
         state.orderByNumberRequest = false;

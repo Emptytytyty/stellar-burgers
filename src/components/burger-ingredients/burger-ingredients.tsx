@@ -7,7 +7,7 @@ import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import {
   getIngredients,
   getIngredientsAction
-} from '../../services/slices/IngredientsSlice';
+} from '../../services/slices/Ingredients/IngredientsSlice';
 
 export const BurgerIngredients: FC = () => {
   const ingredients = useSelector(getIngredients);

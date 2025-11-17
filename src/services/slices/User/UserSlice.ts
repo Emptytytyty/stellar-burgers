@@ -9,7 +9,7 @@ import {
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { deleteCookie, setCookie } from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../../utils/cookie';
 
 type TUserState = {
   user: TUser | null;
@@ -91,7 +91,7 @@ export const UserSlice = createSlice({
         state.loginUserRequest = false;
         state.isAuthChecked = true;
         state.isAuthenticated = false;
-        state.loginUserError = action.payload as string;
+        state.loginUserError = action.error.message!;
       })
       .addCase(loginUser.fulfilled, (state: TUserState, action) => {
         state.loginUserRequest = false;
@@ -106,7 +106,7 @@ export const UserSlice = createSlice({
       .addCase(registerUser.rejected, (state: TUserState, action) => {
         state.loginUserRequest = false;
         state.isAuthChecked = true;
-        state.loginUserError = action.payload as string;
+        state.loginUserError = action.error.message!;
         state.isAuthenticated = false;
       })
       .addCase(registerUser.fulfilled, (state: TUserState, action) => {
@@ -123,7 +123,7 @@ export const UserSlice = createSlice({
         state.loginUserRequest = false;
         state.isAuthChecked = true;
         state.isAuthenticated = false;
-        state.loginUserError = action.payload as string;
+        state.loginUserError = action.error.message!;
       })
       .addCase(getUserData.fulfilled, (state: TUserState, action) => {
         state.loginUserRequest = false;
@@ -137,7 +137,7 @@ export const UserSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state: TUserState, action) => {
         state.logoutUserRequest = false;
-        state.logoutUserError = action.payload as string;
+        state.logoutUserError = action.error.message!;
       })
       .addCase(logoutUser.fulfilled, (state: TUserState, action) => {
         state.user = null;
@@ -150,7 +150,7 @@ export const UserSlice = createSlice({
       })
       .addCase(updateUserData.rejected, (state: TUserState, action) => {
         state.updateUserRequest = false;
-        state.updateUserError = action.payload as string;
+        state.updateUserError = action.error.message!;
       })
       .addCase(updateUserData.fulfilled, (state: TUserState, action) => {
         state.updateUserRequest = false;

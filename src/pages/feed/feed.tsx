@@ -7,7 +7,7 @@ import {
   getFeeds,
   getIsOrdersRequest,
   getOrdersData
-} from '../../services/slices/OrdersSlice';
+} from '../../services/slices/Orders/OrdersSlice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */

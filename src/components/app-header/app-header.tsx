@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AppHeaderUI } from '@ui';
 import { useLocation } from 'react-router-dom';
-import { getUser } from '../../services/slices/UserSlice';
+import { getUser } from '../../services/slices/User/UserSlice';
 import { useSelector } from '../../services/store';
 
 export const AppHeader: FC = () => {

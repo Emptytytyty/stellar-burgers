@@ -4,7 +4,7 @@ import {
   getIsAuthChecked,
   getIsAuthenticated,
   getUserData
-} from '../../services/slices/UserSlice';
+} from '../../services/slices/User/UserSlice';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Preloader } from '@ui';
 import { useEffect } from 'react';

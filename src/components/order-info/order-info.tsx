@@ -5,13 +5,13 @@ import { TIngredient } from '@utils-types';
 import {
   getIngredients,
   getIngredientsAction
-} from '../../services/slices/IngredientsSlice';
+} from '../../services/slices/Ingredients/IngredientsSlice';
 import { useParams } from 'react-router-dom';
 import {
   getIsOrderByNumberRequest,
   getOrderByNumber,
   getOrderModalData
-} from '../../services/slices/OrdersSlice';
+} from '../../services/slices/Orders/OrdersSlice';
 import { useDispatch, useSelector } from '../../services/store';
 
 export const OrderInfo: FC = () => {

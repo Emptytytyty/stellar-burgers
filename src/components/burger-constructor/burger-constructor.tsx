@@ -6,18 +6,18 @@ import {
   burgerConstructorClear,
   getBurgerConstructorIngredients,
   getConstructorOrderData
-} from '../../services/slices/BurgerConstructorSlice';
+} from '../../services/slices/BurgerConstructor/BurgerConstructorSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   getIsAuthenticated,
   getUserData
-} from '../../services/slices/UserSlice';
+} from '../../services/slices/User/UserSlice';
 import {
   getOrderModalData,
   getPostOrdersRequest,
   orderModalDataClear,
   postOrder
-} from '../../services/slices/OrdersSlice';
+} from '../../services/slices/Orders/OrdersSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */

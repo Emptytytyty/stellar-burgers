@@ -4,11 +4,11 @@ import { useLocation } from 'react-router-dom';
 import { BurgerIngredientUI, Preloader } from '@ui';
 import { TBurgerIngredientProps } from './type';
 import { useDispatch, useSelector } from '../../services/store';
-import { burgerConstructorAdd } from '../../services/slices/BurgerConstructorSlice';
+import { burgerConstructorAdd } from '../../services/slices/BurgerConstructor/BurgerConstructorSlice';
 import {
   getIngredientsAction,
   getIsIngredientsLoading
-} from '../../services/slices/IngredientsSlice';
+} from '../../services/slices/Ingredients/IngredientsSlice';
 
 export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
   ({ ingredient, count }) => {

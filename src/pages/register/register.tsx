@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   getIsLoginUserRequest,
   registerUser
-} from '../../services/slices/UserSlice';
+} from '../../services/slices/User/UserSlice';
 import { Preloader } from '@ui';
 import { setCookie } from '../../utils/cookie';
 

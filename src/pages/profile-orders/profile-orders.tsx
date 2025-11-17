@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react';
 import {
   getUserOrders,
   getUserOrdersData
-} from '../../services/slices/OrdersSlice';
+} from '../../services/slices/Orders/OrdersSlice';
 import { useDispatch, useSelector } from '../../services/store';
 
 export const ProfileOrders: FC = () => {
