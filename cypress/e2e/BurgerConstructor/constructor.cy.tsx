@@ -1,47 +1,72 @@
-import ingredients from './ingredients.json';
-import user from './user.json';
-import order from './order.json';
+beforeEach(() => {
+  cy.fixture('/user.json').then(data => {
+    localStorage.setItem('accessToken', data.accessToken);
+    cookieStore.set('refreshToken', data.refreshToken);
+  }).then(() => {
+    cy.intercept('GET', `/api/ingredients`, { fixture: '/ingredients.json' }).as(
+      'getIngredients'
+    );
+    cy.intercept('GET', `/api/auth/user`, { fixture: '/user.json' }).as(
+      'getUser'
+    );
+    cy.intercept('POST', `/api/orders`, { fixture: '/order.json', headers: {
+      authorization: localStorage.getItem('accessToken')
+    } }).as(
+      'postOrder'
+    );
+  })
 
-describe('проверяем доступность приложения', function () {
-  it('сервис должен быть доступен по адресу localhost:5173', async () => {
-    cy.intercept('GET', `/api/ingredients`, {
-      statusCode: 200,
-      body: JSON.stringify(ingredients)
-    }).as('getIngredients');
+  cy.visit('/');
+});
 
-    cy.intercept('GET', `/api/auth/user`, {
-      statusCode: 200,
-      headers: {
-        authorization: 'accessToken'
-      },
-      body: JSON.stringify(user)
-    }).as('getUser');
+afterEach(() => {
+  localStorage.removeItem('accessToken');
+  cookieStore.delete('refreshToken');
+})
 
-    cy.intercept('POST', `/api/orders`, {
-      statusCode: 200,
-      headers: {
-        authorization: 'accessToken'
-      },
-      body: JSON.stringify(order)
-    }).as('postOrder');
-    
-    cy.visit('http://localhost:4000');
+it('Работа конструктора', () => {
+  cy.contains('Краторная булка N-200i').parent().contains('Добавить').click();
+  cy.contains('Биокотлета из марсианской Магнолии')
+    .parent()
+    .contains('Добавить')
+    .click();
+  cy.get('.constructor-element.constructor-element_pos_top').should(
+    'contain',
+    'Краторная булка N-200i'
+  );
+  cy.get('.constructor-element.constructor-element_pos_bottom').should(
+    'contain',
+    'Краторная булка N-200i'
+  );
+  cy.get(
+    '.constructor-element:not(.constructor-element_pos_top):not(.constructor-element_pos_bottom)'
+  ).should('contain', 'Биокотлета из марсианской Магнолии');
+});
 
-    cy.get('button')
-      .should('contain', 'Добавить')
-      .each((el, index) => {
-        if (index % 2) cy.wrap(el).click();
-      });
-    cy.get('ul>li>a>img').first().click();
-    cy.get('#modals button').click();
-    cy.get('ul>li>a>img').first().click();
-    cy.get('#modals div').last().click({ force: true });
-    cy.contains('Оформить заказ').click();
-    cy.get('#modals div').first().should('be.visible');
-    cy.get('#modals h2').should('contain', '99');
-    cy.get('#modals button').click();
-    cy.get('#modals div').should('not.exist');
-    cy.get('#root').should('contain', 'Выберите булки');
-    cy.get('#root').should('contain', 'Выберите начинку');
-  });
+it('Модальные окна', () => {
+  cy.contains('Биокотлета из марсианской Магнолии').parent().click();
+  cy.get('#modals').should('contain', 'Биокотлета из марсианской Магнолии');
+  cy.get('#modals button').click();
+  cy.get('#modals').children().should('not.exist');
+  cy.contains('Биокотлета из марсианской Магнолии').parent().click();
+  cy.get('#modals').children().last().click('topLeft', { force: true });
+  cy.get('#modals').children().should('not.exist');
+});
+
+it('Оформление заказа', () => {
+  cy.contains('Флюоресцентная булка R2-D3')
+    .parent()
+    .contains('Добавить')
+    .click();
+  cy.contains('Соус Spicy-X').parent().contains('Добавить').click();
+  cy.contains('Биокотлета из марсианской Магнолии')
+    .parent()
+    .contains('Добавить')
+    .click();
+  cy.contains('Оформить заказ').click();
+  cy.get('#modals h2').should('contain', '99');
+  cy.get('#modals button').click();
+  cy.contains('Оформить заказ').parent().prev().should('contain', 'Выберите булки');
+  cy.contains('Оформить заказ').parent().prev().prev().should('contain', 'Выберите начинку');
+  cy.contains('Оформить заказ').parent().prev().prev().prev().should('contain', 'Выберите булки');
 });

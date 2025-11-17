@@ -21,7 +21,7 @@ export type TOrdersState = {
   orderByNumberError: null | string;
 };
 
-const initialState: TOrdersState = {
+export const initialState: TOrdersState = {
   ordersData: null,
   userOrders: [],
   isOrdersRequest: false,

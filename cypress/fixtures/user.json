@@ -3,5 +3,7 @@
   "user": {
     "email": "Evgeniy@mail.ru",
     "name": "Evgeniy"
-  }
+  },
+  "accessToken": "TestAccessToken",
+  "refreshToken": "TestRefreshToken"
 }
